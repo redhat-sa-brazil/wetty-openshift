@@ -3,7 +3,7 @@ LABEL maintainer="kdevensen@gmail.com"
 ENV HOME=/opt/workspace
 RUN yum install -y --setopt=tsflags=nodocs --disablerepo='*' --enablerepo='rhel-7-server-rpms' \
 		openssl \
-        openssh \
+        openssh-clients \
         openssh-server && \
     yum clean all && \
     rm -rf /var/cache/yum/*
