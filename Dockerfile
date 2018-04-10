@@ -1,5 +1,5 @@
 FROM rhel
-LABEL maintainer="kdevensen@gmail.com"
+LABEL maintainer="kdevensen@gmail.com" contributor="rafaelcba@gmail.com"
 ENV HOME=/opt/workspace
 RUN yum install -y --setopt=tsflags=nodocs --disablerepo='*' --enablerepo='rhel-7-server-rpms' \
 		openssl \
@@ -17,7 +17,8 @@ RUN /usr/bin/ssh-keygen -A -N '' && \
     /usr/sbin/setcap 'cap_net_bind_service=+ep' /usr/sbin/sshd
 
 EXPOSE 22
-WORKDIR /home/default
+
 USER default
+RUN /usr/bin/ssh-keygen -q -t rsa -N ''
 
 CMD ["/usr/sbin/sshd", "-D", "-p", "22", "-E", "/home/default/ssh.log"]
