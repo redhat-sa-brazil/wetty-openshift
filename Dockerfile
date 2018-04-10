@@ -7,10 +7,8 @@ RUN yum install -y --setopt=tsflags=nodocs --disablerepo='*' --enablerepo='rhel-
     yum clean all && \
     rm -rf /var/cache/yum/*
 
-RUN mkdir /home/default && \
-    useradd -u 2000 default && \
-    echo ${WETTY_PASSWORD} | passwd default --stdin && \
-    chown default:default /home/default
+RUN useradd -u 2000 default && \
+    echo ${WETTY_PASSWORD} | passwd default --stdin
 
 RUN /usr/bin/ssh-keygen -A -N '' && \
     chmod -R a+r /etc/ssh/* && \
